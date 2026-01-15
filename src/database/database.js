@@ -33,5 +33,10 @@ export class Database {
 
     }
 
-
+    // Método para selecionar dados da tabela
+    select(table){
+        let data = this.#database[table] ?? [];
+        
+        return data;
+    }
 }
