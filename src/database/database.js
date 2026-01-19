@@ -30,14 +30,22 @@ export class Database {
         }
 
         this.#persist();
-        
+
         return data;
     }
 
     // Método para selecionar dados da tabela
-    select(table){
+    select(table, filters){
         let data = this.#database[table] ?? [];
         
+        if (filters) {
+            data = data.filter((row) => {
+                return Object.entries(filters).some(([key, value]) => {
+                    return row[key].toLowerCase().includes(value.toLowerCase());
+                })
+            })
+        }
+
         return data;
     }
 }
