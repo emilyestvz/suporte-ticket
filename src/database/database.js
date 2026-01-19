@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-const DATABASE_PATH = new URL('db.json', import.meta.url)
+const DATABASE_PATH = new URL('./db.json', import.meta.url)
 
 export class Database {
     #database = {
@@ -8,7 +8,7 @@ export class Database {
     }
 
     constructor() {
-        fs.readFile(DATABASE_PATH, 'utf-8')
+        fs.readFile(DATABASE_PATH, 'utf8')
             .then(data => {
                 this.#database = JSON.parse(data)
             })
@@ -30,7 +30,8 @@ export class Database {
         }
 
         this.#persist();
-
+        
+        return data;
     }
 
     // Método para selecionar dados da tabela
